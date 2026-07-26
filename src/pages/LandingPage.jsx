@@ -8,6 +8,7 @@ import {
   MessageSquareX,
   TrendingDown,
   Repeat,
+  BotMessageSquare,
   Users,
   Kanban,
   CalendarCheck,
@@ -59,6 +60,11 @@ const PAIN_POINTS = [
 ];
 
 const FEATURES = [
+  {
+    icon: BotMessageSquare,
+    title: 'Atendimento por IA no WhatsApp',
+    description: 'Uma IA integrada ao WhatsApp atende e qualifica seus leads 24 horas por dia, 7 dias por semana, e já registra tudo automaticamente no CRM.',
+  },
   { icon: Users, title: 'Gestão de Leads', description: 'Centralize todos os contatos em um só lugar, com histórico completo de interações.' },
   { icon: Kanban, title: 'Funil de Vendas (Kanban)', description: 'Visualize cada oportunidade por etapa e arraste os leads conforme avançam na negociação.' },
   { icon: CalendarCheck, title: 'Agenda de Visitas', description: 'Organize visitas e reuniões com lembretes automáticos para você e para o cliente.' },
@@ -97,7 +103,13 @@ const PLANS = [
   {
     name: 'Starter',
     description: 'Para imobiliárias pequenas dando os primeiros passos na gestão de leads.',
-    features: ['Até 3 corretores', 'Gestão de leads e funil Kanban', 'Agenda de visitas', 'Suporte por e-mail'],
+    features: [
+      'Até 3 corretores',
+      'Gestão de leads e funil Kanban',
+      'Atendimento por IA no WhatsApp 24/7',
+      'Agenda de visitas',
+      'Suporte por e-mail',
+    ],
     highlighted: false,
   },
   {
@@ -106,7 +118,7 @@ const PLANS = [
     features: [
       'Até 15 corretores',
       'Tudo do plano Starter',
-      'Automações de acompanhamento de leads',
+      'IA no WhatsApp com respostas personalizadas',
       'Relatórios e métricas avançadas',
       'Suporte prioritário',
     ],
@@ -332,8 +344,9 @@ function Hero() {
             Organize leads, feche mais vendas, <span className="text-primary">sem planilhas</span>
           </h1>
           <p className="mt-6 text-lg text-gray-500 leading-relaxed max-w-lg">
-            O CRM.Elite reúne leads, funil de vendas e agenda de visitas em um só lugar —
-            para sua imobiliária vender mais com menos retrabalho.
+            O CRM.Elite reúne leads, funil de vendas e agenda de visitas em um só lugar, com uma
+            IA que atende seus leads no WhatsApp 24 horas por dia — para sua imobiliária vender
+            mais com menos retrabalho.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-5">
             <a
