@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// HashRouter: GitHub Pages has no server-side rewrite, so a BrowserRouter
+// deep link (e.g. /calendario) 404s on refresh. Hash routes always resolve to index.html.
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Calendario from './pages/Calendario';
