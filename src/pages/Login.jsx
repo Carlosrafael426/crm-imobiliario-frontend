@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
+import { User, Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
 import api from '../services/api';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const USERNAME_REGEX = /^[A-Za-z]+$/;
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -19,10 +19,12 @@ export default function Login() {
 
   const validate = () => {
     const next = {};
-    if (!email.trim()) {
-      next.email = 'O e-mail é obrigatório.';
-    } else if (!EMAIL_REGEX.test(email)) {
-      next.email = 'Informe um e-mail válido.';
+    if (!usuario.trim()) {
+      next.usuario = 'O usuário é obrigatório.';
+    } else if (!USERNAME_REGEX.test(usuario)) {
+      next.usuario = 'O usuário deve conter apenas letras.';
+    } else if (usuario.length < 4 || usuario.length > 8) {
+      next.usuario = 'O usuário deve ter entre 4 e 8 letras.';
     }
 
     if (!password) {
@@ -44,14 +46,14 @@ export default function Login() {
     setGeneralError(null);
     setIsLoading(true);
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post('/auth/login', { usuario, password });
       const { token } = response.data;
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem('crm_token', token);
       navigate('/');
     } catch (err) {
       console.error('Erro ao autenticar', err);
-      setGeneralError('E-mail ou senha inválidos.');
+      setGeneralError('Usuário ou senha inválidos.');
     } finally {
       setIsLoading(false);
     }
@@ -74,28 +76,29 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
           <div>
-            <label htmlFor="email" className="block text-xs font-semibold text-gray-500 mb-1.5">
-              E-mail
+            <label htmlFor="usuario" className="block text-xs font-semibold text-gray-500 mb-1.5">
+              Usuário
             </label>
             <div className="relative">
-              <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+              <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
-                id="email"
-                type="email"
-                value={email}
+                id="usuario"
+                type="text"
+                value={usuario}
+                maxLength={8}
                 onChange={(e) => {
-                  setEmail(e.target.value);
-                  setErrors((prev) => ({ ...prev, email: undefined }));
+                  setUsuario(e.target.value);
+                  setErrors((prev) => ({ ...prev, usuario: undefined }));
                 }}
-                placeholder="voce@empresa.com"
+                placeholder="usuario"
                 className={`w-full bg-gray-50 border rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-700 transition-all focus:outline-none focus:ring-2 ${
-                  errors.email
+                  errors.usuario
                     ? 'border-red-300 focus:ring-red-100 focus:border-red-300'
                     : 'border-gray-200 focus:ring-blue-100 focus:border-blue-300'
                 }`}
               />
             </div>
-            {errors.email && <p className="text-xs text-red-500 mt-1.5">{errors.email}</p>}
+            {errors.usuario && <p className="text-xs text-red-500 mt-1.5">{errors.usuario}</p>}
           </div>
 
           <div>
