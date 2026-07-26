@@ -4,6 +4,10 @@
 @theme {
   --color-accent-salmon: #FF8C7A;
   --color-salmon: #ff8c7a;
+
+  --color-primary: #F97362;
+  --color-action: #3B82F6;
+  --color-app-bg: #F7F8FA;
 }
 
 @layer base {

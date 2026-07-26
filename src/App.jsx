@@ -4,12 +4,13 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Calendario from './pages/Calendario';
+import Login from './pages/Login';
 import GlobalNotifications from './components/GlobalNotifications';
 import AIAssistantWidget from './components/AIAssistantWidget';
 
-function App() {
+function AppShell() {
   return (
-    <Router>
+    <>
       <GlobalNotifications />
       <AIAssistantWidget />
       <Layout>
@@ -20,6 +21,17 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/*" element={<AppShell />} />
+      </Routes>
     </Router>
   );
 }
