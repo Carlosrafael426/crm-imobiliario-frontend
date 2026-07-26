@@ -50,7 +50,7 @@ export default function Login() {
       const { token } = response.data;
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem('crm_token', token);
-      navigate('/');
+      navigate('/app');
     } catch (err) {
       console.error('Erro ao autenticar', err);
       setGeneralError('Usuário ou senha inválidos.');

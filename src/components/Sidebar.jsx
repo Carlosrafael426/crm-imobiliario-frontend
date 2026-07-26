@@ -5,11 +5,11 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Dashboard', path: '/', icon: <Home size={20} /> },
-    { name: 'Novos Leads', path: '/novos', icon: <PlusCircle size={20} /> },
-    { name: 'Visitas', path: '/visitas', icon: <Calendar size={20} /> },
-    { name: 'Propostas', path: '/propostas', icon: <MessageSquare size={20} /> },
-    { name: 'Calendário', path: '/calendario', icon: <Calendar size={20} /> }, // Usando o icone de calendario novamente ou similar, ajustaremos conforme necessario.
+    { name: 'Dashboard', path: '/app', icon: <Home size={20} /> },
+    { name: 'Novos Leads', path: '/app/novos', icon: <PlusCircle size={20} /> },
+    { name: 'Visitas', path: '/app/visitas', icon: <Calendar size={20} /> },
+    { name: 'Propostas', path: '/app/propostas', icon: <MessageSquare size={20} /> },
+    { name: 'Calendário', path: '/app/calendario', icon: <Calendar size={20} /> }, // Usando o icone de calendario novamente ou similar, ajustaremos conforme necessario.
   ];
 
   return (

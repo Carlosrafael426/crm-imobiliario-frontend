@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Calendario from './pages/Calendario';
 import Login from './pages/Login';
+import LandingPage from './pages/LandingPage';
 import GlobalNotifications from './components/GlobalNotifications';
 import AIAssistantWidget from './components/AIAssistantWidget';
 
@@ -18,7 +19,7 @@ function AppShell() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/calendario" element={<Calendario />} />
           {/* Outras rotas serão adicionadas aqui */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/app" replace />} />
         </Routes>
       </Layout>
     </>
@@ -29,8 +30,10 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/*" element={<AppShell />} />
+        <Route path="/app/*" element={<AppShell />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
