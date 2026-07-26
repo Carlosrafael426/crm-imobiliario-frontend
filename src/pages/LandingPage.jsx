@@ -28,6 +28,7 @@ import {
   Loader2,
   CheckCircle2,
 } from 'lucide-react';
+import { FaInstagram, FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -182,15 +183,17 @@ function Reveal({ children, className = '', delay = 0 }) {
   );
 }
 
-function SocialBadge({ label, initials, href = '#' }) {
+function SocialIconButton({ label, href = '#', className = '', children }) {
   return (
     <a
       href={href}
       aria-label={label}
       title={label}
-      className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-[11px] font-bold text-gray-500 hover:border-primary hover:text-primary transition-colors"
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      className={`w-11 h-11 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 hover:shadow-lg ${className}`}
     >
-      {initials}
+      {children}
     </a>
   );
 }
@@ -229,7 +232,7 @@ function Header() {
 
         <a
           href="#contato"
-          className="hidden md:inline-flex items-center gap-2 bg-action hover:bg-action/90 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-colors shadow-sm shadow-action/20"
+          className="hidden md:inline-flex items-center gap-2 bg-action hover:bg-action/90 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 hover:scale-105 shadow-md shadow-action/25"
         >
           Agendar Demonstração
         </a>
@@ -334,13 +337,16 @@ function DashboardMockup() {
 
 function Hero() {
   return (
-    <section className="bg-white pt-16 pb-24 sm:pt-20 sm:pb-32">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-app-bg/60 pt-16 pb-24 sm:pt-20 sm:pb-32">
+      <div className="absolute -top-24 -left-24 w-[28rem] h-[28rem] bg-primary/20 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute top-1/3 -right-32 w-[26rem] h-[26rem] bg-action/15 rounded-full blur-3xl" aria-hidden="true" />
+
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 items-center">
         <Reveal>
           <span className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
             <Sparkles size={13} /> Feito para imobiliárias
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-gray-900 leading-[1.1] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold text-gray-900 leading-[1.08] tracking-tight">
             Organize leads, feche mais vendas, <span className="text-primary">sem planilhas</span>
           </h1>
           <p className="mt-6 text-lg text-gray-500 leading-relaxed max-w-lg">
@@ -349,18 +355,44 @@ function Hero() {
             mais com menos retrabalho.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-            <a
-              href="#contato"
-              className="inline-flex items-center justify-center gap-2 bg-action hover:bg-action/90 text-white px-7 py-3.5 rounded-xl font-medium shadow-sm shadow-action/25 transition-colors w-full sm:w-auto"
-            >
-              Agendar Demonstração Gratuita <ArrowRight size={18} />
-            </a>
+            <div className="relative group w-full sm:w-auto">
+              <div className="absolute -inset-1 bg-action/40 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity animate-pulse" aria-hidden="true" />
+              <a
+                href="#contato"
+                className="relative inline-flex items-center justify-center gap-2 bg-action hover:bg-action/90 text-white px-8 py-4 rounded-xl font-semibold text-base shadow-xl shadow-action/30 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              >
+                Agendar Demonstração Gratuita <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
             <a
               href="#como-funciona"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               <PlayCircle size={18} className="text-primary" /> Ver como funciona
             </a>
+          </div>
+
+          <div className="mt-10 flex items-center gap-4">
+            <div className="flex -space-x-3">
+              {['bg-primary', 'bg-action', 'bg-emerald-400', 'bg-amber-400'].map((color, i) => (
+                <div
+                  key={i}
+                  className={`w-9 h-9 rounded-full ${color} border-2 border-white shadow-sm flex items-center justify-center text-white text-[11px] font-bold`}
+                >
+                  {['MA', 'RT', 'CD', '+'][i]}
+                </div>
+              ))}
+            </div>
+            <div>
+              <div className="flex gap-0.5 text-primary">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 font-medium mt-0.5">
+                Imobiliárias já vendem mais com o CRM.Elite
+              </p>
+            </div>
           </div>
         </Reveal>
 
@@ -388,7 +420,7 @@ function ProblemSolution() {
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {PAIN_POINTS.map((item, i) => (
             <Reveal key={item.title} delay={i * 120}>
-              <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 shadow-sm">
+              <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-lg transition-shadow duration-300">
                 <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5">
                   <item.icon className="text-red-400" size={22} />
                 </div>
@@ -417,9 +449,13 @@ function Features() {
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {FEATURES.map((feature, i) => (
             <Reveal key={feature.title} delay={(i % 3) * 120}>
-              <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 hover:shadow-md hover:border-gray-200 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                  <feature.icon className="text-primary" size={22} />
+              <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-transparent transition-all duration-300">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-md ${
+                    i % 2 === 0 ? 'bg-primary shadow-primary/30' : 'bg-action shadow-action/30'
+                  }`}
+                >
+                  <feature.icon className="text-white" size={22} />
                 </div>
                 <h3 className="font-bold text-gray-900 text-lg">{feature.title}</h3>
                 <p className="mt-2 text-gray-500 text-sm leading-relaxed">{feature.description}</p>
@@ -488,7 +524,7 @@ function Testimonials() {
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, i) => (
             <Reveal key={t.name} delay={i * 120}>
-              <div className="h-full bg-white rounded-2xl border border-gray-100 p-7 shadow-sm flex flex-col">
+              <div className="h-full bg-white rounded-2xl border border-gray-100 border-l-4 border-l-primary p-7 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
                 <Quote className="text-primary/30" size={32} />
                 <StarRating />
                 <p className="mt-4 text-gray-700 text-sm leading-relaxed flex-1">“{t.quote}”</p>
@@ -524,46 +560,78 @@ function Plans() {
         <div className="mt-14 grid lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {PLANS.map((plan, i) => (
             <Reveal key={plan.name} delay={i * 120} className="h-full">
-              <div
-                className={`relative h-full flex flex-col bg-white rounded-2xl p-8 ${
-                  plan.highlighted
-                    ? 'border-2 border-primary shadow-xl shadow-primary/10 lg:scale-105'
-                    : 'border border-gray-100 shadow-sm'
-                }`}
-              >
-                {plan.badge && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                    <Sparkles size={12} /> {plan.badge}
-                  </span>
+              <div className="relative h-full">
+                {plan.highlighted && (
+                  <div
+                    className="hidden lg:block absolute -inset-2 bg-gradient-to-br from-primary/40 to-action/30 rounded-[2rem] blur-2xl opacity-70"
+                    aria-hidden="true"
+                  />
                 )}
-
-                <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{plan.description}</p>
-
-                <ul className="mt-6 space-y-3 flex-1">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-600">
-                      <Check size={16} className="text-primary shrink-0 mt-0.5" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#contato"
-                  className={`mt-8 inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-colors ${
+                <div
+                  className={`relative h-full flex flex-col bg-white rounded-2xl p-8 transition-all duration-300 ${
                     plan.highlighted
-                      ? 'bg-action hover:bg-action/90 text-white shadow-sm shadow-action/20'
-                      : 'border border-gray-200 text-gray-700 hover:border-action hover:text-action'
+                      ? 'border-2 border-primary shadow-2xl shadow-primary/20 lg:scale-105'
+                      : 'border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1'
                   }`}
                 >
-                  Fale Conosco
-                </a>
+                  {plan.badge && (
+                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                      <Sparkles size={12} /> {plan.badge}
+                    </span>
+                  )}
+
+                  <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed">{plan.description}</p>
+
+                  <ul className="mt-6 space-y-3 flex-1">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-600">
+                        <Check size={16} className="text-primary shrink-0 mt-0.5" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="#contato"
+                    className={`mt-8 inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-colors ${
+                      plan.highlighted
+                        ? 'bg-action hover:bg-action/90 text-white shadow-sm shadow-action/20'
+                        : 'border border-gray-200 text-gray-700 hover:border-action hover:text-action'
+                    }`}
+                  >
+                    Fale Conosco
+                  </a>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+function CtaBanner() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-r from-primary via-[#fb6f56] to-action py-16">
+      <div className="absolute -top-16 -left-16 w-72 h-72 bg-white/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute -bottom-16 -right-16 w-72 h-72 bg-white/10 rounded-full blur-3xl" aria-hidden="true" />
+
+      <Reveal className="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Pronto para vender mais e nunca mais perder um lead?
+        </h2>
+        <p className="mt-3 text-white/80 max-w-xl mx-auto">
+          Agende uma demonstração gratuita e veja o CRM.Elite organizando sua operação em minutos.
+        </p>
+        <a
+          href="#contato"
+          className="mt-7 inline-flex items-center justify-center gap-2 bg-white text-primary hover:scale-105 px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-black/10 transition-all duration-300"
+        >
+          Agendar Demonstração Gratuita <ArrowRight size={18} />
+        </a>
+      </Reveal>
     </section>
   );
 }
@@ -798,9 +866,22 @@ function Footer() {
               lugar — sem planilhas e sem retrabalho.
             </p>
             <div className="flex items-center gap-3 mt-6">
-              <SocialBadge label="Instagram" initials="IG" />
-              <SocialBadge label="LinkedIn" initials="in" />
-              <SocialBadge label="Facebook" initials="f" />
+              <SocialIconButton
+                label="Instagram"
+                href="https://instagram.com"
+                className="bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 hover:shadow-pink-500/40"
+              >
+                <FaInstagram size={18} />
+              </SocialIconButton>
+              <SocialIconButton label="Facebook" href="https://facebook.com" className="bg-[#1877F2] hover:shadow-[#1877F2]/40">
+                <FaFacebookF size={16} />
+              </SocialIconButton>
+              <SocialIconButton label="LinkedIn" href="https://linkedin.com" className="bg-[#0A66C2] hover:shadow-[#0A66C2]/40">
+                <FaLinkedinIn size={16} />
+              </SocialIconButton>
+              <SocialIconButton label="WhatsApp" href="https://wa.me/5511400000000" className="bg-[#25D366] hover:shadow-[#25D366]/40">
+                <FaWhatsapp size={18} />
+              </SocialIconButton>
             </div>
           </div>
 
@@ -857,6 +938,7 @@ export default function LandingPage() {
       <HowItWorks />
       <Testimonials />
       <Plans />
+      <CtaBanner />
       <ContactForm />
       <Footer />
     </div>
