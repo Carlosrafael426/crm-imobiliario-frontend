@@ -61,14 +61,13 @@ const PAIN_POINTS = [
 const FEATURES = [
   { icon: Users, title: 'Gestão de Leads', description: 'Centralize todos os contatos em um só lugar, com histórico completo de interações.' },
   { icon: Kanban, title: 'Funil de Vendas (Kanban)', description: 'Visualize cada oportunidade por etapa e arraste os leads conforme avançam na negociação.' },
-  { icon: CalendarCheck, title: 'Agenda de Visitas', description: 'Organize visitas aos imóveis com lembretes automáticos para você e para o cliente.' },
-  { icon: Building2, title: 'Cadastro de Imóveis', description: 'Mantenha seu portfólio de imóveis sempre atualizado e vinculado aos leads certos.' },
+  { icon: CalendarCheck, title: 'Agenda de Visitas', description: 'Organize visitas e reuniões com lembretes automáticos para você e para o cliente.' },
   { icon: Handshake, title: 'Propostas e Negociações', description: 'Acompanhe propostas em andamento e o status de cada negociação em tempo real.' },
   { icon: BarChart3, title: 'Relatórios e Métricas', description: 'Entenda a performance da sua equipe com indicadores claros de conversão.' },
 ];
 
 const STEPS = [
-  { number: '01', icon: ClipboardList, title: 'Cadastre seus imóveis e leads', description: 'Importe ou adicione manualmente seu portfólio e sua base de contatos em minutos.' },
+  { number: '01', icon: ClipboardList, title: 'Cadastre seus leads', description: 'Importe ou adicione manualmente sua base de contatos em minutos.' },
   { number: '02', icon: Kanban, title: 'Acompanhe o funil de vendas', description: 'Veja cada lead avançar pelas etapas, do primeiro contato até a proposta.' },
   { number: '03', icon: Trophy, title: 'Feche negócios mais rápido', description: 'Priorize quem está pronto para comprar e reduza o tempo médio de fechamento.' },
 ];
@@ -107,7 +106,7 @@ const PLANS = [
     features: [
       'Até 15 corretores',
       'Tudo do plano Starter',
-      'Cadastro de imóveis ilimitado',
+      'Automações de acompanhamento de leads',
       'Relatórios e métricas avançadas',
       'Suporte prioritário',
     ],
@@ -333,7 +332,7 @@ function Hero() {
             Organize leads, feche mais vendas, <span className="text-primary">sem planilhas</span>
           </h1>
           <p className="mt-6 text-lg text-gray-500 leading-relaxed max-w-lg">
-            O CRM.Elite reúne leads, funil de vendas, agenda de visitas e imóveis em um só lugar —
+            O CRM.Elite reúne leads, funil de vendas e agenda de visitas em um só lugar —
             para sua imobiliária vender mais com menos retrabalho.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-5">
@@ -782,7 +781,7 @@ function Footer() {
           <div className="lg:col-span-2">
             <p className="text-2xl font-bold text-primary tracking-tight">CRM.Elite</p>
             <p className="mt-3 text-sm text-gray-500 leading-relaxed max-w-sm">
-              O CRM feito para imobiliárias organizarem leads, funil de vendas e imóveis em um só
+              O CRM feito para imobiliárias organizarem leads, funil de vendas e visitas em um só
               lugar — sem planilhas e sem retrabalho.
             </p>
             <div className="flex items-center gap-3 mt-6">

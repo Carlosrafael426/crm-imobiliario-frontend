@@ -64,7 +64,7 @@ export default function Login() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-gray-200/60 border border-gray-100 p-8 md:p-10">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary tracking-tight">CRM.Elite</h1>
-          <p className="text-gray-500 text-sm mt-2">Gestão inteligente de leads e imóveis</p>
+          <p className="text-gray-500 text-sm mt-2">Gestão inteligente de leads para imobiliárias</p>
         </div>
 
         {generalError && (
