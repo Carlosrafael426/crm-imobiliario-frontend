@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
       <Sidebar />
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Aqui podemos colocar um Header (TopBar) para notificações no futuro */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#F9FAFB] p-8">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#F9FAFB] p-5 pt-20 lg:p-8">
           {children}
         </main>
       </div>

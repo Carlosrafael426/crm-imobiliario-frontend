@@ -4,6 +4,7 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Calendario from './pages/Calendario';
+import SellerDashboard from './pages/SellerDashboard';
 import Login from './pages/Login';
 import LandingPage from './pages/LandingPage';
 import GlobalNotifications from './components/GlobalNotifications';
@@ -17,6 +18,7 @@ function AppShell() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/painel" element={<SellerDashboard />} />
           <Route path="/calendario" element={<Calendario />} />
           {/* Outras rotas serão adicionadas aqui */}
           <Route path="*" element={<Navigate to="/app" replace />} />

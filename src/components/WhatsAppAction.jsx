@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MessageCircle, Loader2 } from 'lucide-react';
 import api from '../services/api';
 
-export default function WhatsAppAction({ lead }) {
+export default function WhatsAppAction({ lead, label, className }) {
   const [loading, setLoading] = useState(false);
 
   const handleWhatsAppClick = async () => {
@@ -26,17 +26,21 @@ export default function WhatsAppAction({ lead }) {
   if (!lead.telefone) return null;
 
   return (
-    <button 
+    <button
       onClick={handleWhatsAppClick}
       disabled={loading}
-      className="p-2 bg-mint-50/50 text-emerald-600 rounded-xl hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm shadow-emerald-500/5 group border border-emerald-100"
-      title="Enviar mensagem no WhatsApp"
+      className={
+        className ||
+        'p-2 bg-mint-50/50 text-emerald-600 rounded-xl hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-sm shadow-emerald-500/5 group border border-emerald-100'
+      }
+      title={label || 'Enviar mensagem no WhatsApp'}
     >
       {loading ? (
         <Loader2 size={16} className="animate-spin" />
       ) : (
-        <MessageCircle size={16} className="group-hover:-rotate-12 transition-transform duration-300" />
+        <MessageCircle size={16} className={label ? undefined : 'group-hover:-rotate-12 transition-transform duration-300'} />
       )}
+      {label && <span>{label}</span>}
     </button>
   );
 }
