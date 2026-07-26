@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-accent-salmon: #FF8C7A;
+  --color-salmon: #ff8c7a;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-white text-gray-800 antialiased;
+    /* Fundo branco puro (#FFFFFF) e textos em cinza grafite (#1F2937) default is gray-800 */
+  }
+}
+
+.kanban-column {
+  @apply bg-gray-50/50 rounded-2xl flex flex-col p-4 w-full min-w-[320px] transition-colors border border-transparent;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
