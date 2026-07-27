@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
-import api from '../services/api';
+import { useAuth } from '../context/useAuth';
 
 const USERNAME_REGEX = /^[A-Za-z]+$/;
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
@@ -46,10 +47,7 @@ export default function Login() {
     setGeneralError(null);
     setIsLoading(true);
     try {
-      const response = await api.post('/auth/login', { usuario, password });
-      const { token } = response.data;
-      const storage = remember ? localStorage : sessionStorage;
-      storage.setItem('crm_token', token);
+      await login(usuario, password, remember);
       navigate('/app');
     } catch (err) {
       console.error('Erro ao autenticar', err);
@@ -171,6 +169,11 @@ export default function Login() {
             Fale com nosso time comercial
           </a>
         </p>
+
+        <div className="mt-6 text-center text-xs text-gray-400 bg-gray-50 rounded-xl py-2.5 px-3">
+          Ambiente de demonstração (sem backend ainda): <strong className="text-gray-500">admin</strong> ou{' '}
+          <strong className="text-gray-500">bruno</strong>, senha <strong className="text-gray-500">123456</strong>
+        </div>
       </div>
     </div>
   );

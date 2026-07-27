@@ -31,7 +31,7 @@ export default function AIAssistantWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-[100]">
+    <div className="fixed bottom-6 left-6 lg:left-[290px] z-[100]">
       {/* Botão flutuante */}
       {!isOpen && (
         <button
