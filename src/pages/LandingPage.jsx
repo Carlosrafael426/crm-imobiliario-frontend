@@ -32,6 +32,9 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
+import avatarMarina from '../assets/testimonials/marina-alves.jpeg';
+import avatarRodrigo from '../assets/testimonials/rodrigo-teixeira.jpeg';
+import avatarCamila from '../assets/testimonials/camila-duarte.jpeg';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -106,18 +109,21 @@ const TESTIMONIALS = [
     name: 'Marina Alves',
     role: 'Diretora Comercial',
     company: 'Alves Imóveis',
+    avatar: avatarMarina,
   },
   {
     quote: 'A visão do funil de vendas mudou completamente como gerenciamos a equipe. Hoje sabemos exatamente onde cada negociação está.',
     name: 'Rodrigo Teixeira',
     role: 'Sócio-fundador',
     company: 'Teixeira Realty',
+    avatar: avatarRodrigo,
   },
   {
     quote: 'Implementação rápida e simples. Em uma semana toda a equipe já estava usando o sistema no dia a dia.',
     name: 'Camila Duarte',
     role: 'Gerente de Vendas',
     company: 'Duarte & Associados',
+    avatar: avatarCamila,
   },
 ];
 
@@ -592,11 +598,18 @@ function Testimonials() {
                 <Quote className="text-primary/30" size={32} />
                 <StarRating />
                 <p className="mt-4 text-gray-700 text-sm leading-relaxed flex-1">“{t.quote}”</p>
-                <div className="mt-6 pt-5 border-t border-gray-100">
-                  <p className="font-bold text-gray-900 text-sm">{t.name}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    {t.role} · {t.company}
-                  </p>
+                <div className="mt-6 pt-5 border-t border-gray-100 flex items-center gap-3">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="w-11 h-11 rounded-full object-cover border border-gray-100 shrink-0"
+                  />
+                  <div>
+                    <p className="font-bold text-gray-900 text-sm">{t.name}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {t.role} · {t.company}
+                    </p>
+                  </div>
                 </div>
               </div>
             </Reveal>
