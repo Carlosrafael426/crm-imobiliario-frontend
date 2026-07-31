@@ -9,6 +9,9 @@ import {
   TrendingDown,
   Repeat,
   BotMessageSquare,
+  Layers,
+  Target,
+  ChevronDown,
   Users,
   Kanban,
   CalendarCheck,
@@ -57,6 +60,24 @@ const PAIN_POINTS = [
     title: 'Retrabalho manual',
     description:
       'Planilhas desatualizadas e informações duplicadas tomam tempo que deveria ser investido em vender.',
+  },
+];
+
+const OVERVIEW_PILLARS = [
+  {
+    icon: Layers,
+    title: 'Organiza',
+    description: 'Centraliza leads, conversas e imóveis de interesse em um só painel — sem planilha e sem WhatsApp perdido.',
+  },
+  {
+    icon: BotMessageSquare,
+    title: 'Atende',
+    description: 'Uma IA cuida do primeiro contato no WhatsApp 24/7, qualifica o lead e já registra tudo no CRM.',
+  },
+  {
+    icon: Target,
+    title: 'Converte',
+    description: 'Um funil visual leva cada lead do primeiro contato até o fechamento, sem se perder pelo caminho.',
   },
 ];
 
@@ -435,9 +456,52 @@ function ProblemSolution() {
   );
 }
 
+function SystemOverview() {
+  return (
+    <section id="visao-geral" className="bg-white py-24 scroll-mt-24">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <Reveal className="max-w-2xl mx-auto text-center">
+          <span className="text-primary text-sm font-semibold uppercase tracking-wide">O que o CRM.Elite faz</span>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+            Um sistema que organiza, atende e vende por você
+          </h2>
+          <p className="mt-4 text-gray-500 text-lg">
+            Nada de dez ferramentas soltas. O CRM.Elite reúne todo o processo comercial da sua
+            imobiliária em um só lugar, do primeiro contato ao fechamento.
+          </p>
+        </Reveal>
+
+        <div className="mt-14 grid md:grid-cols-3 gap-6">
+          {OVERVIEW_PILLARS.map((pillar, i) => (
+            <Reveal key={pillar.title} delay={i * 120}>
+              <div className="h-full text-center md:text-left bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 mx-auto md:mx-0">
+                  <pillar.icon className="text-primary" size={22} />
+                </div>
+                <h3 className="font-bold text-gray-900 text-lg">{pillar.title}</h3>
+                <p className="mt-2 text-gray-500 text-sm leading-relaxed">{pillar.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200} className="mt-14 flex flex-col items-center gap-2 text-center">
+          <a
+            href="#funcionalidades"
+            className="flex flex-col items-center gap-2 text-sm font-medium text-gray-500 hover:text-primary transition-colors"
+          >
+            Veja cada funcionalidade em detalhes
+            <ChevronDown size={18} className="animate-bounce" />
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Features() {
   return (
-    <section id="funcionalidades" className="bg-white py-24 scroll-mt-24">
+    <section id="funcionalidades" className="bg-app-bg py-24 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl">
           <span className="text-primary text-sm font-semibold uppercase tracking-wide">Funcionalidades</span>
@@ -470,7 +534,7 @@ function Features() {
 
 function HowItWorks() {
   return (
-    <section id="como-funciona" className="bg-app-bg py-24 scroll-mt-24">
+    <section id="como-funciona" className="bg-white py-24 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl mx-auto text-center">
           <span className="text-primary text-sm font-semibold uppercase tracking-wide">Como funciona</span>
@@ -512,7 +576,7 @@ function HowItWorks() {
 
 function Testimonials() {
   return (
-    <section id="depoimentos" className="bg-white py-24 scroll-mt-24">
+    <section id="depoimentos" className="bg-app-bg py-24 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl">
           <span className="text-primary text-sm font-semibold uppercase tracking-wide">Depoimentos</span>
@@ -545,7 +609,7 @@ function Testimonials() {
 
 function Plans() {
   return (
-    <section id="planos" className="bg-app-bg py-24 scroll-mt-24">
+    <section id="planos" className="bg-white py-24 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl mx-auto text-center">
           <span className="text-primary text-sm font-semibold uppercase tracking-wide">Planos</span>
@@ -934,6 +998,7 @@ export default function LandingPage() {
       <Header />
       <Hero />
       <ProblemSolution />
+      <SystemOverview />
       <Features />
       <HowItWorks />
       <Testimonials />
